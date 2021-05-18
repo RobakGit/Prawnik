@@ -1,0 +1,64 @@
+body{
+	background: #1B2026;
+	color: #0BA1F8;
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+#container{
+	width: 95%;
+	margin-left: 2%;
+	margin-top: 200px;
+}
+
+.window{
+	font-family: 'Lato', sans-serif;
+	color: white;
+	background: #1B2026;
+	width: 100%;
+	max-height: 600px;
+}
+
+#sprawy_aktualne, #sprawy_zakonczone{
+	margin-top: 50px;
+}
+
+button{
+	background: #0BA1F8;
+	border: 1px solid #272F37;
+	border-bottom: 0;
+	color: white;
+}
+
+th{
+	background: #65788E;
+	color: #0BA1F8;
+}
+
+tr:nth-child(2n+1) {
+    background: #343D49;
+}
+
+tr:nth-child(even) {
+    background: #404C5A;
+}
+
+tr:hover td{
+	color: white;
+	background: black;
+}
+
+td{
+	cursor: pointer;
+}
+
+
+/* For desktop: */
+@media only screen and (min-width: 768px) {
+  
+#container{
+	width: 70%;
+	margin-left: 25%;
+	margin-top: 50px;
+}
+
+}

@@ -1,0 +1,33 @@
+{
+  "name": "prawnicy",
+  "version": "0.1.0",
+  "description": "Strona laczaca prawnikow i ulatwiajaca im prace",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Miłosz Robak",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.1.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.17.0",
+    "lodash": "^4.17.20",
+    "mammoth": "^1.4.9",
+    "moment": "^2.24.0",
+    "mongoose": "^5.8.2",
+    "morgan": "^1.9.1",
+    "nodemon": "^2.0.6",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "handlebars": "^4.5.0"
+  }
+}

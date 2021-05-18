@@ -1,0 +1,32 @@
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/wiadomosci.css">
+</head>
+<body>
+
+{{> menu }}
+
+{{> messages }}
+
+<div id="container">
+
+
+	<div class="row">
+		<div class="title">
+			<h3>{{messages.tytul}}</h3>
+			<div class="sender_receiver">
+				Od: {{messages.nadawca}}<br>
+				Do: {{messages.odbiorca}}
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+	
+		<div class="window overflow-auto">
+			{{messages.tresc}}
+		</div>
+		<button onclick="location='/wiadomosci/new?id={{messages.nadawca_id}}&title={{messages.tytul}}'">Odpowiedz</button>
+
+	</div>
+
+</div>

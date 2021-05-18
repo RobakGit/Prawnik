@@ -1,0 +1,85 @@
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/add.css">
+</head>
+<body>
+
+{{> menu }}
+
+{{> messages }}
+
+<div id="container">
+	
+	<div class="row">
+
+		<div id="dane" class="col-md-12">
+			Dane klienta:<br>
+			<form action="/sprawy/add" method="POST" enctype="multipart/form-data" id="sprawa">
+			<input type="text" name="imie" id="imie" placeholder="Imię" class="col-md-2">
+			<input type="text" name="nazwisko" id="nazwisko" placeholder="Nazwisko" class="col-md-2">
+			<input type="text" name="adres" id="adres" placeholder="Adres zamieszkania" class="col-md-2">
+			<input type="text" name="kod_pocztowy" id="kod_pocztowy" placeholder="Kod pocztowy" class="col-md-2"><br>
+			<input type="text" name="email" id="email" placeholder="Email" class="col-md-2">
+			<input type="text" name="telefon" id="telefon" placeholder="Nr. telefonu" class="col-md-2">
+		</div>
+	
+	</div>
+
+	<div class="row">
+
+		<div id="opis_sprawy" class="col-md-12">
+			Opis sprawy:<br>
+			<textarea form="sprawa" placeholder="Opis sprawy" name="opis" id="opis"></textarea>
+			
+		</div>
+	
+	</div>
+
+	<div class="row">
+
+		<div id="pliki">
+			Dołączone pliki:
+			
+			<input type="file" name="fileUpload" id="fileUpload" multiple ng2FileSelect [uploader]="uploader">
+
+			<select name="id_prawnika">
+				<option selected value=" "> -- Wybierz prawnika -- </option>
+				{{#each users}}
+					{{#if status}}
+						{{#if administrator}}
+						{{else}}
+							<option value="{{this.id}}">{{this.imie}} {{this.nazwisko}}</option>
+						{{/if}}
+					{{/if}}
+				{{/each}}
+			</select>
+
+			<button type="submit">upload</button>
+</form>
+			
+		</div>
+	
+	</div>
+
+</div>
+
+<script>
+	// $(function() {
+ //    $("#send").click(function() {
+ //      // Warto zrobić walidacje po stronie frontu żeby nie wypierdalał sam backend
+ //      console.log($("input#fileUpload")[0].files);
+ //      var pliki = [];
+ //      for (var i = $("input#fileUpload")[0].files.length-1; i >= 0; i--) {
+ //      	pliki.push($("input#fileUpload")[0].files[i].name);
+ //      }
+ //      var dataString = 'imie='+ $("input#imie").val() + '&nazwisko=' + $("input#nazwisko").val() + '&adres=' + $("input#adres").val() + '&kod_pocztowy=' + $("input#kod_pocztowy").val() + '&email=' + $("input#email").val() + '&telefon=' + $("input#telefon").val() + '&opis=' + $("textarea#opis").val() + '&pliki=' + pliki;
+ //  $.ajax({
+ //    type: "POST",
+ //    url: "/sprawy/add",
+ //    data: dataString
+ //  });
+ // setTimeout(function(){ console.log("wysłane"); document.forms[0].submit(); }, 300);
+ //      return false;
+ //    });
+ //  });
+</script>
+

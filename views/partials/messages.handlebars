@@ -1,0 +1,41 @@
+{{! Błędy rejestracji w danych}}
+{{#if errors}}
+	{{#each errors}}
+ 		<div class="col-md-4 offset-md-4 fixed-top alert alert-warning alert-dismissible fade show" role="alert">
+  				{{ this.msg }}
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  			</button>
+		</div>
+	{{/each}}
+{{/if}}
+
+{{! Udana rejestracja}}
+{{#if success_msg}}
+		<div class="col-md-4 offset-md-4 fixed-top alert alert-success alert-dismissible fade show" role="alert">
+  				{{ success_msg }}
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  			</button>
+		</div>
+{{/if}}
+
+{{! Błędy rejestracji istniejący użytkownik}}
+{{#if error_msg}}
+		<div class="col-md-4 offset-md-4 fixed-top alert alert-warning alert-dismissible fade show" role="alert">
+  				{{ error_msg }}
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  			</button>
+		</div>
+{{/if}}
+
+{{! Błędy Logowania}}
+{{#if error}}
+		<div class="col-md-4 offset-md-4 fixed-top alert alert-warning alert-dismissible fade show" role="alert">
+  				{{ error }}
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  			</button>
+		</div>
+{{/if}}

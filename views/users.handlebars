@@ -1,0 +1,127 @@
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/users.css">
+</head>
+<body>
+
+{{> menu }}
+
+{{> messages }}
+
+{{#if administrator}}
+
+<div id="container">
+	
+	<div class="row">
+
+		<div id="zakonczone" class="col-md-5">
+			Dodaj użytkownika:
+			<div class="window overflow-auto">
+
+				<form action="/uzytkownicy" method="POST" class="ml-2">
+					
+					<input class="col-md-4" type="text" name="login" placeholder="Login" {{#if login}} value="{{login}}" {{/if}}><br>
+					<input class="col-md-4" type="password" name="password" placeholder="Hasło">
+					<input class="col-md-4 ml-2" type="password" name="password2" placeholder="Powtórz hasło"><br>
+					<input class="col-md-4" type="text" name="imie" placeholder="Imię" {{#if imie_f}} value="{{imie_f}}" {{/if}}>
+					<input class="col-md-4 ml-2" type="text" name="nazwisko" placeholder="Nazwisko" {{#if nazwisko_f}} value="{{nazwisko_f}}" {{/if}}><br>
+					<input class="col-md-3" type="text" name="miejscowosc" placeholder="Miejscowosc" {{#if miejscowosc}} value="{{miejscowosc}}" {{/if}}><br>
+					<input class="col-md-4" type="text" name="email" placeholder="Email" {{#if email}} value="{{email}}" {{/if}}><br>
+					<input class="col-md-4" type="text" name="telefon" placeholder="Telefon" {{#if telefon}} value="{{telefon}}" {{/if}}><br>
+					<select name="rola" class="ml-2">
+						<option value="" disabled selected>Rola</option>
+						<option value="Administrator">Administrator</option>
+						<option value="Prawnik">Prawnik</option>
+					</select>
+
+					<button id="register" type="submit" class="ml-4">Dodaj użytkownika</button>
+
+				</form>
+
+			</div>
+		</div>
+		
+		<div id="zakonczone" class="col-md-6 offset-md-1">
+			Użytkownicy:
+			<div class="window overflow-auto">
+
+				<table class="table table-striped table-hover text-light">
+					
+					{{#each users}}
+					<tr>
+						<td>{{ this.imie }} {{ this.nazwisko }}</td>
+						<td>{{ this.miejscowosc }}</td>
+						<td>{{ this.rola }}</td>
+						{{#if status}}
+
+							<td class="bg-success text-center">✓</td>
+							{{else}}
+							<td class="bg-danger text-center">✗</td>
+						
+						{{/if}}
+						<td><i id="remove:{{ this.id }}" name="{{ this.imie }} {{ this.nazwisko }}" class="remove bx bx-trash"></i>
+							<i id="edit:{{ this.id }}" class="edit bx bx-edit"></i>
+							<i id="show:{{ this.id }}" class="show bx bx-show"></i></td>
+					</tr>
+					{{/each}}
+
+				</table>
+
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div id="confirm">
+	<p>Czy na pewno chcesz usunąć <span id="user"></span>?</p>
+<button id="accept">Tak</button>
+<button id="denial">Nie</button>
+</div>
+
+<div id="edit_board">
+	Tu będą informacje do zmiany
+</div>
+
+<div id="info">
+	<p>Tu będą informacje o użytkowniku</p>
+	{{#each users}}
+		
+			{{this}}
+		
+	{{/each}}
+</div>
+
+<script type="text/javascript">
+
+var remove = document.getElementsByClassName('remove');
+var confirm = document.getElementById('confirm');
+var denial = document.getElementById('denial');
+var accept = document.getElementById('accept');
+var user = document.getElementById('user');
+
+for (var i=0; i < remove.length; i++) {
+    remove[i].onclick = function(){
+        confirm.style.display = 'block';
+        var id = this.id;
+        accept.setAttribute("onclick", "location='uzytkownicy/"+id.replace(':', '/')+"'");
+        user.innerText = this.attributes["name"].value;
+    }
+};
+
+var show = document.getElementsByClassName('show');
+
+for (var i=0; i < show.length; i++) {
+    show[i].onclick = function(){
+        
+    }
+};
+
+denial.onclick = function(){
+	confirm.style.display = 'none';
+};
+
+</script>
+
+
+{{/if}}

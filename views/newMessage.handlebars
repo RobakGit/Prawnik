@@ -1,0 +1,46 @@
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/newMessage.css">
+</head>
+<body>
+
+{{> menu }}
+
+{{> messages }}
+
+<div id="container">
+
+	<form method="POST">
+		<div class="row">
+			{{#if ticket}}
+			<input name="administracja" value="Administracja" type="hidden">
+			{{else}}
+			Odbiorca: 
+			<select name="odbiorca" class="col-md-2 mr-2">
+				{{#each users}}
+					{{#if_eq this.id ../re_id }}
+						<option selected value="{{../this.id}}|{{../this.imie}} {{../this.nazwisko}}">{{../this.imie}} {{../this.nazwisko}}</option>
+					{{else}}
+						<option value="{{../this.id}}|{{../this.imie}} {{../this.nazwisko}}">{{../this.imie}} {{../this.nazwisko}}</option>
+					{{/if_eq}}
+				{{/each}}
+			</select>
+			{{/if}}
+
+			{{#if re_title}}
+			Tytuł: <input type="text" name="title" class="col-md-6" value="Re: {{re_title}}">
+			{{else}}
+			Tytuł: <input type="text" name="title" class="col-md-6">
+			{{/if}}
+
+		</div>
+
+		<div class="row">
+
+			<div id="wiadomosc" class="col-md-12">
+				Treść wiadomości: 
+				<textarea name="tresc" class="window"></textarea>
+			</div>
+			<button type="submit">Wyślij</button>
+	</form>
+	</div>
+</div>

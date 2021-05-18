@@ -1,0 +1,90 @@
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/sprawy.css">
+</head>
+<body>
+
+{{> menu }}
+
+{{> messages }}
+
+<div id="container">
+	
+	<div class="row">
+
+		<button onclick="location='/sprawy/add'">Dodaj nową sprawę</button>
+
+	</div>
+
+	<div class="row">
+
+		<div id="sprawy_aktualne" class="col-md-12">
+			Sprawy aktualne:
+			<div class="window overflow-auto">
+				<table class="table table-striped table-hover text-light">
+
+					<th>Imię i nazwisko</th>
+					<th>Adres</th>
+					<th>Data</th>
+					<th>Przyjęte</th>
+					<th>Opis</th>
+					<th>Prawnik</th>
+
+				{{#each cases}}
+
+					{{#if this.zakonczone}}
+					
+					{{else}}
+
+						<tr>
+							<td>{{this.imie}} {{this.nazwisko}}</td>
+							<td>{{this.adres}}</td>
+							<td>{{this.data_full}}</td>
+							{{#if this.przyjete}}
+							<td style="background: green; text-align: center;">{{this.przyjete}}</td>
+							{{else}}
+							<td style="background: red; text-align: center;">{{this.przyjete}}</td>
+							{{/if}}
+							<td>{{limit_znakow 50 this.opis}}</td>
+							<td>{{this.id_prawnika}}</td>
+						</tr>
+
+					{{/if}}
+				{{/each}}
+
+				</table>
+			</div>
+		</div>
+
+		<div id="sprawy_zakonczone" class="col-md-12">
+			Sprawy zakonczone:
+			<div class="window overflow-auto">
+				<table class="table table-striped table-hover text-light">
+
+					<th>Imię i nazwisko</th>
+					<th>Adres</th>
+					<th>Data</th>
+					<th>Opis</th>
+					<th>Prawnik</th>
+
+				{{#each cases}}
+					
+					{{#if this.zakonczone}}
+						
+						<tr>
+							<td>{{this.imie}} {{this.nazwisko}}</td>
+							<td>{{this.adres}}</td>
+							<td>{{this.data_full}}</td>
+							<td>{{limit_znakow 50 this.opis}}</td>
+							<td>{{this.id_prawnika}}</td>
+						</tr>
+
+					{{/if}}
+
+				{{/each}}
+				</table>
+			</div>
+		</div>
+	
+	</div>
+
+</div>

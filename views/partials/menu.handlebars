@@ -1,0 +1,76 @@
+<div class="position-fixed" id="menu">
+
+	<div id="menu-top">
+
+		<div id="user-info">
+
+			<p><b>{{ imie }} {{ nazwisko }}</b></p>
+			{{#if administrator }}
+				<p>Administrator</p>
+				{{else if status }}
+				<p class="dostepny">Chce przyjmować zgłoszenia.</p>
+				<label class="switch">
+  					<input type="checkbox" checked>
+  					<span onclick="location= '/status/false/{{location}}'" class="slider round"></span>
+				</label>
+				{{else}}
+				<p class="niedostepny">Nie chce przyjmować zgłoszeń.</p>
+				<label class="switch">
+  					<input type="checkbox">
+  					<span onclick="location= '/status/true/{{location}}'" class="slider round"></span>
+				</label>
+			{{/if}}
+
+		</div>
+
+		<i onclick="menu()" class="bx bx-menu"></i>
+
+	</div>
+
+	<div id="navi">
+
+		{{#if_eq location 'panel'}}
+      		<a href="/panel"><div class="current navi"><i class="navi-icon bx bxs-dashboard"></i>Panel główny</div></a>
+		{{else}}
+      		<a href="/panel"><div class="navi"><i class="navi-icon bx bxs-dashboard"></i>Panel główny</div></a>
+		{{/if_eq}}
+		{{#if_eq location 'wiadomosci'}}
+		<a href="/wiadomosci?box=odebrane"><div class="current navi"><i class="navi-icon bx bx-mail-send"></i>Wiadomości</div></a>
+		{{else}}
+		<a href="/wiadomosci?box=odebrane"><div class="navi"><i class="navi-icon bx bx-mail-send"></i>Wiadomości</div></a>
+		{{/if_eq}}
+
+		{{#if administrator }}
+		
+		{{#if_eq location 'uzytkownicy'}}
+			<a href="/uzytkownicy"><div class="current navi"><i class="navi-icon bx bx-user-circle"></i>Zarządzaj użytkownikami</div></a>
+		{{else}}
+			<a href="/uzytkownicy"><div class="navi"><i class="navi-icon bx bx-user-circle"></i>Zarządzaj użytkownikami</div></a>
+		{{/if_eq}}
+
+		{{#if_eq location 'sprawy'}}
+			<a href="/sprawy"><div class="current navi"><i class="navi-icon bx bx-file"></i>Zarządzaj sprawami</div></a>
+		{{else}}
+			<a href="/sprawy"><div class="navi"><i class="navi-icon bx bx-file"></i>Zarządzaj sprawami</div></a>
+		{{/if_eq}}
+
+		{{/if}}
+
+		<a href="/logout"><div class="navi"><i class="navi-icon bx bx-log-out"></i>Wyloguj się</div></a>
+
+	</div>
+
+</div>
+
+<script type="text/javascript">
+
+	function menu(){
+		navi = document.getElementById("navi");
+		if(navi.offsetWidth < 1 || navi.offsetHeight < 1){
+			navi.style.display = "block";
+		} else {
+			navi.style.display = "none";
+		}
+	}
+
+</script>

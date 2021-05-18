@@ -1,0 +1,78 @@
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/wiadomosci.css">
+</head>
+<body>
+
+{{> menu }}
+
+{{> messages }}
+
+<div id="container">
+
+	<div class="row">
+		<button id="message" onclick="location='/wiadomosci/new'">Utwórz wiadomość do użytkownika</button>
+	</div>
+
+	<div class="row">
+		<button id="ticket" onclick="location='/wiadomosci/new?ticket=true'">Utwórz zgłoszenie do administracji</button>
+	</div>
+
+	<div class="row">
+
+		<div id="wiadomosci" class="col-md-12">
+			<button onclick="location='/wiadomosci?box=odebrane'">Odebrane</button>
+			<button onclick="location='/wiadomosci?box=wyslane'">Wysłane</button>
+			Skrzynka odbiorcza:
+			<form action="/wiadomosci/remove" method="POST">
+			<button class="float-right" onclick="location='/wiadomosci?box=wyslane'">Usuń zaznaczone</button>
+			<div class="window overflow-auto">
+				<table class="table table-striped table-hover text-light">
+				<tr>
+					<th>X</th>
+					{{#if messagesS}}
+					<th>Odbiorca</th>
+					{{else}}
+					<th>Nadawca</th>
+					{{/if}}
+					<th>Tytuł</th>
+					<th>Data</th>
+				</tr>
+				
+				{{#each messagesR}}
+					{{#if this.visiblity_o}}
+					{{#if this.odczytana}}
+						<tr>
+							<td><input type="checkbox" name="remove" value="{{this.id}}"></td>
+							<td onclick="location='/wiadomosci/{{this.id}}'">{{ this.nadawca }}</td>
+							<td onclick="location='/wiadomosci/{{this.id}}'">{{ this.tytul }}</td>
+							<td onclick="location='/wiadomosci/{{this.id}}'">{{date this.date }}</td>
+						</tr>
+						{{else}}
+						<tr>
+							<td><input type="checkbox" name="remove" value="{{this.id}}"></td>
+							<td onclick="location='/wiadomosci/{{this.id}}'"><b>{{ this.nadawca }}</b></td>
+							<td onclick="location='/wiadomosci/{{this.id}}'"><b>{{ this.tytul }}</b></td>
+							<td onclick="location='/wiadomosci/{{this.id}}'"><b>{{date this.date }}</b></td>
+						</tr>
+						{{/if}}
+					{{else}}
+					{{/if}}
+				{{/each}}
+
+				{{#each messagesS}}
+					{{#if this.visiblity_n}}
+						<tr>
+							<td><input type="checkbox" name="remove" value="{{this.id}}"></td>
+							<td onclick="location='/wiadomosci/{{this.id}}'">{{ this.odbiorca }}</td>
+							<td onclick="location='/wiadomosci/{{this.id}}'">{{ this.tytul }}</td>
+							<td onclick="location='/wiadomosci/{{this.id}}'">{{date this.date }}</td>
+						</tr>
+					{{else}}
+					{{/if}}
+				{{/each}}
+			</form>
+				</table>
+			</div>
+		</div>
+
+</div>
